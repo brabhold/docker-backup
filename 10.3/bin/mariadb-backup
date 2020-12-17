@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+source /root/.mariadb-backup.env
+
+mariabackup --backup --host=${MYSQL_HOSTNAME} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --databases="${MYSQL_DATABASE}" --stream=xbstream | gzip > ${BACKUP_DIR}/$(date +%Y%m%d%H%M)_${MYSQL_DATABASE}_mariabackup.gz
+
+mysqldump --host=${MYSQL_HOSTNAME} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} | bzip2 -c > ${BACKUP_DIR}/$(date +%Y%m%d%H%M)_${MYSQL_DATABASE}.sql.bz
