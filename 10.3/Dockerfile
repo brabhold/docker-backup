@@ -16,14 +16,12 @@ RUN set -eux; \
     apt-get clean; \
     rm -r /var/lib/apt/lists/*
 
-ENV BACKUP_DIR=/backup
-ENV TZ="Europe/Brussels"
+ENV TZ "Europe/Brussels"
+ENV MARIABACKUP false
+ENV MYSQLDUMP true
+ENV BACKUP_DIR /backup
+ENV BACKUP_RETENTION_DAYS 7
 
-RUN set -eux; \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime; \
-    echo $TZ > /etc/timezone
-
-COPY crontab /etc/cron.d/mariadb-backup
 COPY bin/* /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint"]
