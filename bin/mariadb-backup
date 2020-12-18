@@ -8,7 +8,7 @@ if [ "${MARIABACKUP}" = true ]; then
     MARIABACKUP_DIR=${BACKUP_DIR}/mariabackup
     mkdir -p ${MARIABACKUP_DIR}
     echo "$(date "+%Y-%m-%d %H:%M:%S") mariabackup dump command to ${MARIABACKUP_DIR}"
-    mariabackup --backup --host=${MYSQL_HOSTNAME} --port=${MYSQL_PORT} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --databases="${MYSQL_DATABASE}" --stream=xbstream | gzip > ${MARIABACKUP_DIR}/${MYSQL_DATABASE}-backup--$(date +%Y-%m-%dT%H%M%S).gz
+    mariabackup --backup --host=${MYSQL_HOSTNAME} --port=${MYSQL_PORT} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --databases="${MYSQL_DATABASE}" --stream=xbstream | gzip > ${MARIABACKUP_DIR}/${MYSQL_DATABASE}--$(date +%Y-%m-%dT%H%M%S).gz
 fi
 
 # Backup with mysqldump
@@ -16,7 +16,7 @@ if [ "${MYSQLDUMP}" = true ]; then
     MYSQLDUMP_DIR=${BACKUP_DIR}/mysqldump
     mkdir -p ${MYSQLDUMP_DIR}
     echo "$(date "+%Y-%m-%d %H:%M:%S") mysqldump dump command to ${MYSQLDUMP_DIR}"
-    mysqldump --host=${MYSQL_HOSTNAME} --port=${MYSQL_PORT} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} | gzip > ${MYSQLDUMP_DIR}/${MYSQL_DATABASE}-dump--$(date +%Y-%m-%dT%H%M%S).sql.gz
+    mysqldump --host=${MYSQL_HOSTNAME} --port=${MYSQL_PORT} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} | gzip > ${MYSQLDUMP_DIR}/${MYSQL_DATABASE}--$(date +%Y-%m-%dT%H%M%S).sql.gz
 fi
 
 # Remove older files
