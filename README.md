@@ -1,11 +1,10 @@
-# Docker image to backup MariaDB (maybe MySQL too)
+# Docker image to backup MariaDB (maybe MySQL too) and some files
 
-See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/mariadb-backup)
+See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/cron-backup)
 
 # Supported tags and respective `Dockerfile` links
 
-- [ `10.5`, `latest` (*10.5/Dockerfile*)](https://github.com/brabhold/docker-mariadb-backup/blob/main/Dockerfile)
-- [ `10.3` (*10.3/Dockerfile*)](https://github.com/brabhold/docker-mariadb-backup/blob/10.3/Dockerfile)
+- [ `latest` (*Dockerfile*)](https://github.com/brabhold/docker-cron-backup/blob/main/Dockerfile)
 
 # Environment variables
 
