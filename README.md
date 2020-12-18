@@ -23,6 +23,11 @@ Don't forget to mount the `/var/lib/mysql` directory
 
 Use mysqldump command.
 
+`FILES` (default: `null`)
+
+Path of files to backup. If `null`, no backup is made.  
+Various paths is possible (ex: `FILES="/path/to/directory-01 /path/to/directory-02"`)
+
 `BACKUP_DIR` (default: `/backup`)
 
 Backup directory.

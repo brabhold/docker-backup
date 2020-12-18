@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-source /root/.mariadb-backup.env
+source /root/.backup.env
 
 echo "$(date "+%Y-%m-%d %H:%M:%S") mariadb-backup started"
 
 MARIABACKUP_DIR=${BACKUP_DIR}/mariabackup
 MYSQLDUMP_DIR=${BACKUP_DIR}/mysqldump
+FILES_BACKUP_DIR=${BACKUP_DIR}/files
 
 # Backup with mariabackup
 if [ "${MARIABACKUP}" = true ]; then
@@ -20,7 +21,13 @@ if [ "${MYSQLDUMP}" = true ]; then
     mysqldump --host=${MYSQL_HOSTNAME} --port=${MYSQL_PORT} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} | gzip > ${MYSQLDUMP_DIR}/${MYSQL_DATABASE}--$(date +%Y-%m-%dT%H%M%S).sql.gz
 fi
 
+# Backup files
+if [ ! -z "$FILES" ]; then
+    mkdir -p ${FILES_BACKUP_DIR}
+    echo "$(date "+%Y-%m-%d %H:%M:%S") tar command to ${FILES_BACKUP_DIR}"
+    tar -czf ${FILES_BACKUP_DIR}/$(date +%Y-%m-%dT%H%M%S).tar.gz ${FILES}
+fi
+
 # Remove older files
 echo "$(date "+%Y-%m-%d %H:%M:%S") remove older files than ${BACKUP_RETENTION_DAYS} days"
-find ${MARIABACKUP_DIR} -type f -iname '*.gz' -mtime +${BACKUP_RETENTION_DAYS} -exec rm {} \;
-find ${MYSQLDUMP_DIR} -type f -iname '*.gz' -mtime +${BACKUP_RETENTION_DAYS} -exec rm {} \;
+find ${BACKUP_DIR} -type f -iname '*.gz' -mtime +${BACKUP_RETENTION_DAYS} -exec rm {} \;
