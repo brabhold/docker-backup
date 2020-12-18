@@ -1,10 +1,10 @@
 # Docker image to backup MariaDB (maybe MySQL too) and some files
 
-See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/cron-backup)
+See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/backup)
 
 # Supported tags and respective `Dockerfile` links
 
-- [ `latest` (*Dockerfile*)](https://github.com/brabhold/docker-cron-backup/blob/main/Dockerfile)
+- [ `latest` (*Dockerfile*)](https://github.com/brabhold/docker-backup/blob/main/Dockerfile)
 
 # Environment variables
 
@@ -14,13 +14,13 @@ Define timezone.
 
 `MARIABACKUP` (default: `false`)
 
-Use mariabackup command.  
+Use `mariabackup` command.  
 You should ensure that user account has sufficient permissions to read MariaDB's files from the file system.  
 Don't forget to mount the `/var/lib/mysql` directory
 
 `MYSQLDUMP` (default: `true`)
 
-Use mysqldump command.
+Use `mysqldump` command.
 
 `FILES` (default: `null`)
 
