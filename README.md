@@ -2,6 +2,11 @@
 
 See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/mariadb-backup)
 
+# Supported tags and respective `Dockerfile` links
+
+- [ `10.5`, `latest` (*10.5/Dockerfile*)](https://github.com/brabhold/docker-mariadb-backup/blob/main/Dockerfile)
+- [ `10.3` (*10.3/Dockerfile*)](https://github.com/brabhold/docker-mariadb-backup/blob/10.3/Dockerfile)
+
 # Environment variables
 
 `TZ` (default: `Europe/Brussels`)
