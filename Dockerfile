@@ -17,3 +17,5 @@ ENV BACKUP_DIR /backup
 ENV BACKUP_RETENTION_DAYS 7
 
 COPY bin/* /usr/local/bin/
+
+CMD ["tail", "-F", "/dev/null"]
