@@ -2,25 +2,25 @@
 
 See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/backup)
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 - [ `latest` (*Dockerfile*)](https://github.com/brabhold/docker-backup/blob/main/Dockerfile)
 
-# Environment variables
+## Environment variables
 
 `TZ` (default: `Europe/Brussels`)
 
 Define timezone.
 
-`MARIABACKUP` (default: `false`)
+`MARIADB_BACKUP` (default: `false`)
 
-Use `mariabackup` command.  
+Use `mariadb-backup` command.  
 You should ensure that user account has sufficient permissions to read MariaDB's files from the file system.  
 Don't forget to mount the `/var/lib/mysql` directory
 
-`MYSQLDUMP` (default: `true`)
+`MARIADB_DUMP` (default: `true`)
 
-Use `mysqldump` command.
+Use `mariadb-dump` command.
 
 `FILES` (default: `null`)
 
@@ -35,24 +35,20 @@ Backup directory.
 
 Set backup files retention days.
 
-`SCHEDULE` (required)
+## MariaDB variables (required)
 
-Set cron schedule expressions. (ex: "5 4 * * sun" to say "At 04:05 on Sunday.")
-
-# MariaDB variables (required)
-
-`MYSQL_HOSTNAME`
+`MARIADB_HOSTNAME`
 
 Specify MariaDB host name.
 
-`MYSQL_PORT`
+`MARIADB_PORT`
 
 Specify MariaDB port.
 
-`MYSQL_USER`, `MYSQL_PASSWORD`
+`MARIADB_USER`, `MARIADB_PASSWORD`
 
  Specify user and password with right permissions.
 
-`MYSQL_DATABASE`
+`MARIADB_DATABASE`
 
 Specify the name of a database.
