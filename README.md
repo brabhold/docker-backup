@@ -18,6 +18,8 @@ Use `mariadb-backup` command.
 You should ensure that user account has sufficient permissions to read MariaDB's files from the file system.  
 Don't forget to mount the `/var/lib/mysql` directory
 
+**Warning MariaDB >= 10.9**
+
 `MARIADB_DUMP` (default: `true`)
 
 Use `mariadb-dump` command.
