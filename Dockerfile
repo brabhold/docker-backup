@@ -11,10 +11,14 @@ RUN set -e; \
     rm -r /var/lib/apt/lists/*
 
 ENV TZ "Europe/Brussels"
-ENV MARIADB_BACKUP false
-ENV MARIADB_DUMP true
-ENV BACKUP_DIR /backup
-ENV BACKUP_RETENTION_DAYS 7
+ENV USE_MARIADB_BACKUP false
+ENV MARIADB_BACKUP_DIR "/backup/mariadb-backup"
+ENV USE_MARIADB_DUMP true
+ENV MARIADB_DUMP_DIR "/backup/mariadb-dump"
+ENV MARIADB_BACKUP_RETENTION_DAYS 7
+
+ENV FILES_BACKUP_DIR "/backup/files"
+ENV FILES_BACKUP_RETENTION_DAYS 7
 
 COPY bin/* /usr/local/bin/
 

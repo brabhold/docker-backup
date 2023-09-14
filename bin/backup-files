@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo "$(date "+%Y-%m-%d %H:%M:%S") backup-files started"
+
+# Backup files
+if [ ! -z "$FILES_TO_BACKUP" ]; then
+    echo "$(date "+%Y-%m-%d %H:%M:%S") tar command to ${FILES_BACKUP_DIR}"
+    mkdir --parents ${FILES_BACKUP_DIR}
+    tar --create --gzip --file=${FILES_BACKUP_DIR}/$(date +%Y-%m-%dT%H%M%S).tar.gz ${FILES}
+fi
+
+# Remove older files
+echo "$(date "+%Y-%m-%d %H:%M:%S") remove older files than ${FILES_BACKUP_RETENTION_DAYS} days"
+find ${FILES_BACKUP_DIR} -type f -iname '*.gz' -mtime +${FILES_BACKUP_RETENTION_DAYS} -exec rm {} \;
