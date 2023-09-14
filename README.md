@@ -6,6 +6,11 @@ See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/backup)
 
 - [ `latest` (*Dockerfile*)](https://github.com/brabhold/docker-backup/blob/main/Dockerfile)
 
+## Script to use
+
+- `/usr/local/bin/backup-db`
+- `/usr/local/bin/backup-files`
+
 ## Environment variables
 
 ### DB
