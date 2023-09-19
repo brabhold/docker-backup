@@ -11,4 +11,4 @@ fi
 
 # Remove older files
 echo "$(date "+%Y-%m-%d %H:%M:%S") remove older files than ${FILES_BACKUP_RETENTION_DAYS} days"
-find ${FILES_BACKUP_DIR} -type f -iname '*.gz' -mtime +${FILES_BACKUP_RETENTION_DAYS} -exec rm {} \;
+find ${FILES_BACKUP_DIR} -type f -iname '*.gz' -mtime +${FILES_BACKUP_RETENTION_DAYS} -delete 2>/dev/null

@@ -18,4 +18,4 @@ fi
 
 # Remove older files
 echo "$(date "+%Y-%m-%d %H:%M:%S") remove older files than ${MARIADB_BACKUP_RETENTION_DAYS} days"
-find ${MARIADB_BACKUP_DIR} ${MARIADB_DUMP_DIR} -type f -iname '*.gz' -mtime +${MARIADB_BACKUP_RETENTION_DAYS} -exec rm {} \;
+find ${MARIADB_BACKUP_DIR} ${MARIADB_DUMP_DIR} -type f -iname '*.gz' -mtime +${MARIADB_BACKUP_RETENTION_DAYS} -delete 2>/dev/null
