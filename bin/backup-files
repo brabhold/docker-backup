@@ -6,7 +6,7 @@ echo "$(date "+%Y-%m-%d %H:%M:%S") backup-files started"
 if [ ! -z "$FILES_TO_BACKUP" ]; then
     echo "$(date "+%Y-%m-%d %H:%M:%S") tar command to ${FILES_BACKUP_DIR}"
     mkdir --parents ${FILES_BACKUP_DIR}
-    tar --create --gzip --file=${FILES_BACKUP_DIR}/$(date +%Y-%m-%dT%H%M%S).tar.gz ${FILES}
+    tar --create --gzip --file=${FILES_BACKUP_DIR}/$(date +%Y-%m-%dT%H%M%S).tar.gz ${FILES_TO_BACKUP}
 fi
 
 # Remove older files
