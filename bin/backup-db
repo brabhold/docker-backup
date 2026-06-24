@@ -4,18 +4,23 @@ set -eo pipefail
 
 echo "$(date "+%Y-%m-%d %H:%M:%S") backup-db started"
 
+SSL_OPTS=""
+if [ "${USE_MARIADB_SSL}" = false ]; then
+    SSL_OPTS="--skip-ssl"
+fi
+
 # Backup with mariadb-backup
 if [ "${USE_MARIADB_BACKUP}" = true ]; then
     echo "$(date "+%Y-%m-%d %H:%M:%S") mariadb-backup dump command to ${MARIADB_BACKUP_DIR}"
     mkdir --parents ${MARIADB_BACKUP_DIR}
-    mariadb-backup --backup --host=${MARIADB_HOSTNAME} --port=${MARIADB_PORT} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} --databases="${MARIADB_DATABASE}" --stream=xbstream | gzip > ${MARIADB_BACKUP_DIR}/${MARIADB_DATABASE}--$(date +%Y-%m-%dT%H%M%S).gz
+    mariadb-backup --backup ${SSL_OPTS} --host=${MARIADB_HOSTNAME} --port=${MARIADB_PORT} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} --databases="${MARIADB_DATABASE}" --stream=xbstream | gzip > ${MARIADB_BACKUP_DIR}/${MARIADB_DATABASE}--$(date +%Y-%m-%dT%H%M%S).gz
 fi
 
 # Backup with mariadb-dump
 if [ "${USE_MARIADB_DUMP}" = true ]; then
     echo "$(date "+%Y-%m-%d %H:%M:%S") mariadb-dump dump command to ${MARIADB_DUMP_DIR}"
     mkdir --parents ${MARIADB_DUMP_DIR}
-    mariadb-dump --host=${MARIADB_HOSTNAME} --port=${MARIADB_PORT} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} --single-transaction --quick --max_allowed_packet=1024M ${MARIADB_DATABASE} | gzip > ${MARIADB_DUMP_DIR}/${MARIADB_DATABASE}--$(date +%Y-%m-%dT%H%M%S).sql.gz
+    mariadb-dump ${SSL_OPTS} --host=${MARIADB_HOSTNAME} --port=${MARIADB_PORT} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} --single-transaction --quick --max_allowed_packet=1024M ${MARIADB_DATABASE} | gzip > ${MARIADB_DUMP_DIR}/${MARIADB_DATABASE}--$(date +%Y-%m-%dT%H%M%S).sql.gz
 fi
 
 # Remove older files

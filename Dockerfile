@@ -10,6 +10,7 @@ RUN apt update \
     && rm --recursive /var/lib/apt/lists/*
 
 ENV TZ="Europe/Brussels"
+ENV USE_MARIADB_SSL=false
 ENV USE_MARIADB_BACKUP=false
 ENV MARIADB_BACKUP_DIR="/backup/mariadb-backup"
 ENV USE_MARIADB_DUMP=true

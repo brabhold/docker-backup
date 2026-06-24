@@ -18,6 +18,9 @@ See repository on [Docker Hub](https://hub.docker.com/r/brabholdsa/backup)
 - `TZ` (default: `Europe/Brussels`)  
 Define timezone.
 
+- `USE_MARIADB_SSL` (default: `false`)  
+Recent MariaDB clients (>= 11.x) require TLS by default and refuse to connect to a server without TLS. Defaults to `false` (adds `--skip-ssl`) to support servers without TLS configured (e.g. MariaDB 10.6). Set to `true` to enforce TLS.
+
 - `USE_MARIADB_BACKUP` (default: `false`) **Warning MariaDB >= 10.9**  
 Use `mariadb-backup` command.  
 You should ensure that user account has sufficient permissions to read MariaDB's files from the file system.  
