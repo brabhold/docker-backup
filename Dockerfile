@@ -1,14 +1,13 @@
 
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 LABEL maintainer="Yannick Vanhaeren"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN set -e; \
-    apt-get update; \
-    apt-get install -y mariadb-client mariadb-backup; \
-    apt-get clean; \
-    rm -r /var/lib/apt/lists/*
+RUN apt update \
+    && apt install --assume-yes --no-install-recommends mariadb-client mariadb-backup \
+    && apt clean \
+    && rm --recursive /var/lib/apt/lists/*
 
 ENV TZ="Europe/Brussels"
 ENV USE_MARIADB_BACKUP=false
