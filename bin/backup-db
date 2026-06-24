@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 echo "$(date "+%Y-%m-%d %H:%M:%S") backup-db started"
 
 # Backup with mariadb-backup
@@ -13,9 +15,9 @@ fi
 if [ "${USE_MARIADB_DUMP}" = true ]; then
     echo "$(date "+%Y-%m-%d %H:%M:%S") mariadb-dump dump command to ${MARIADB_DUMP_DIR}"
     mkdir --parents ${MARIADB_DUMP_DIR}
-    mariadb-dump --host=${MARIADB_HOSTNAME} --port=${MARIADB_PORT} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} --max_allowed_packet=1024M ${MARIADB_DATABASE} | gzip > ${MARIADB_DUMP_DIR}/${MARIADB_DATABASE}--$(date +%Y-%m-%dT%H%M%S).sql.gz
+    mariadb-dump --host=${MARIADB_HOSTNAME} --port=${MARIADB_PORT} --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} --single-transaction --quick --max_allowed_packet=1024M ${MARIADB_DATABASE} | gzip > ${MARIADB_DUMP_DIR}/${MARIADB_DATABASE}--$(date +%Y-%m-%dT%H%M%S).sql.gz
 fi
 
 # Remove older files
 echo "$(date "+%Y-%m-%d %H:%M:%S") remove older files than ${MARIADB_BACKUP_RETENTION_DAYS} days"
-find ${MARIADB_BACKUP_DIR} ${MARIADB_DUMP_DIR} -type f -iname '*.gz' -mtime +${MARIADB_BACKUP_RETENTION_DAYS} -delete 2>/dev/null
+find ${MARIADB_BACKUP_DIR} ${MARIADB_DUMP_DIR} -type f -iname '*.gz' -mtime +${MARIADB_BACKUP_RETENTION_DAYS} -delete 2>/dev/null || true
